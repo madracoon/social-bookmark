@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Layout from '../../layouts'
 import { actions } from '../../../store/ducks/profile'
 import { Button } from '../../../components/UIComponents'
@@ -16,16 +16,45 @@ function Profile() {
 
   const dispatch = useDispatch();
 
-  function pushAvatar() {
-    dispatch(actions.profileFetching())
+  useEffect(() => {
+    console.log(links)
+    dispatch(actions.profileFetching({id: id}))
+  }, [id]);
+
+  function uploadAvatar() {
+    dispatch(actions.profileChangingAvatar())
   }
+
+  const linkList = links.map((elem, index) => 
+      <li key={elem.network + index}>{elem.network}: {elem.username}</li>
+    )
+  const tagList = tags.map((elem, index) => 
+      <li key={'tag' + index}>#{elem}</li>
+    )  
 
   return(
     <Layout>
       <div className={styles.main}>
-        <div>{id}</div>
-        <div className={styles.avatar}><img src={avatar}/></div>
-        <Button text='GetData' onclick={pushAvatar}/>
+        <div className={styles.avatar}>
+          <img src={avatar}/>
+          <div>
+            <Button text='Change Avatar' onclick={uploadAvatar}/>
+          </div>
+        </div>
+        <div className={styles.info}>
+          <div>
+            Networks
+            <ul>
+              {linkList}
+            </ul>
+          </div>
+          <div>
+            Tags
+            <ul>
+              {tagList}
+            </ul>
+          </div>
+        </div>
       </div>
     </Layout>
   )

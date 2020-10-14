@@ -2,18 +2,27 @@
   width: 800px;
   height: auto;
   background-color: rgb(182, 182, 182);
-  justify-content: center;
   align-self: center;
   margin: 0 auto;
+  display: flex;
+  flex-direction: row;
 }
 
 .avatar {
-  max-width: 300px;
-  max-height: 700px;
+  display: flex;
+  flex-direction: column;
   align-self: start;
 }
 
 .avatar img {
+  max-width: 300px;
+  max-height: 700px;
   border-radius: 10px;
   box-shadow: black 1px;
+}
+
+.info {
+  align-self: end;
+  height: auto;
+  padding-left: 15px;
 }
